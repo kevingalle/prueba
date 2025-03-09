@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugerencias</title>
+    <!-- Agregar el ícono de la pestaña -->
+    <link rel="icon" href="index.ico" type="image/x-icon">
+    <style>
+        /* Estilo de fondo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('fondi.jpg') no-repeat center center fixed; /* Imagen de fondo */
+            background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+            height: 100vh; /* Altura completa de la ventana */
+            color: #fff; /* Color de texto blanco para mayor visibilidad */
+        }
+
+        /* Estilo del botón de regresar */
+        .back-button {
+            display: inline-block;
+            margin: 20px;
+            text-decoration: none;
+        }
+
+        .back-button img {
+            width: 80px; /* Tamaño del ícono de regreso */
+            height: auto;
+        }
+
+        /* Estilo para el contenedor del formulario de sugerencias */
+        .suggestions-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo de los campos del formulario */
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fff;
+            color: #333;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Estilo del botón de enviar */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón de regresar -->
+    <a href="login.html" class="back-button">
+        <img src="regresar.png" alt="Regresar">
+    </a>
+
+    <div class="suggestions-container">
+        <h1>Sugerencias</h1>
+        <h2>¡Nos encantaría saber tu opinión!</h2>
+
+        <form id="suggestionForm" action="javascript:void(0);" method="POST">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" placeholder="Ingresa tu nombre" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
+
+            <label for="suggestion">Sugerencia:</label>
+            <textarea id="suggestion" name="suggestion" rows="4" placeholder="Escribe tu sugerencia aquí" required></textarea>
+
+            <button type="submit" id="submitBtn">Enviar Sugerencia</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Huerto Inteligente. <a href="https://www.thingspeak.com" target="_blank">Powered by ThingSpeak</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // Recoger los valores del formulario
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var suggestion = document.getElementById('suggestion').value;
+
+            // Crear el mensaje que se enviará por WhatsApp
+            var message = "Nombre: " + name + "%0ACorreo Electrónico: " + email + "%0A%0ASugerencia: " + suggestion;
+            
+            // URL de WhatsApp con el número de teléfono y el mensaje
+            var whatsappUrl = "https://wa.me/4961053624?text=" + message;
+
+            // Redirigir al usuario a WhatsApp
+            window.open(whatsappUrl, "_blank");
+        });
+    </script>
+
+</body>
+</html>

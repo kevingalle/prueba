@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Humedad del Suelo</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <!-- Agregar el ícono de la pestaña -->
+     <link rel="icon" href="index.ico" type="image/x-icon">
+     <!-- Agregar FontAwesome para íconos -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: url('imagen.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        h1 {
+            margin-top: 60px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        canvas {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="window.history.back()">⬅ Regresar</button>
+
+    <h1>Historial de Humedad del Suelo</h1>
+    <canvas id="humedadChart" width="400" height="200"></canvas>
+
+    <script>
+        // Datos de humedad del suelo
+        const datosHumedad = [
+            { fecha: "2025-03-01", humedad: 45 },
+            { fecha: "2025-03-02", humedad: 50 },
+            { fecha: "2025-03-03", humedad: 55 },
+            { fecha: "2025-03-04", humedad: 60 },
+            { fecha: "2025-03-05", humedad: 53 },
+            { fecha: "2025-03-06", humedad: 58 },
+            { fecha: "2025-03-07", humedad: 61 },
+            { fecha: "2025-03-08", humedad: 64 },
+        ];
+
+        // Extraer datos para el gráfico
+        const fechas = datosHumedad.map(d => d.fecha);
+        const humedadValores = datosHumedad.map(d => d.humedad);
+
+        // Configurar el gráfico
+        const ctx = document.getElementById('humedadChart').getContext('2d');
+        const humedadChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: fechas,
+                datasets: [{
+                    label: 'Humedad del Suelo (%)',
+                    data: humedadValores,
+                    fill: false,
+                    borderColor: 'rgba(0, 255, 0, 1)',
+                    backgroundColor: 'rgba(0, 255, 0, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: { color: 'white' }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'white' },
+                        title: { display: true, text: 'Fecha', color: 'white' }
+                    },
+                    y: {
+                        ticks: { color: 'white' },
+                        title: { display: true, text: 'Humedad (%)', color: 'white' },
+                        min: 0,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
